@@ -42,7 +42,7 @@ app.post("/todo-list", async(req, res) =>{
 app.put("/todo-list/:id" , async(req, res) => {
     const id =  req.params.id;
     const body = req.body
-    const filter = {_id: ObjectId(id)};
+    const filter = {_id: new ObjectId(id)};
     const updateDoc = {
         $set: {
             title: body.title,
@@ -54,9 +54,9 @@ app.put("/todo-list/:id" , async(req, res) => {
     res.send(result)
 })
 
-app.delete('/todo-list/:id' , async(res , req) =>{
+app.delete('/todo-list/:id' , async(req , res) =>{
     const id =  req.params.id;
-    const filter =  {_id: ObjectId(id)}
+    const filter =  {_id: new ObjectId(id)}
     const result =  await todoListCollectionDB.deleteOne(filter);
     res.send(result)
 })
